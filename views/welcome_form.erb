@@ -1,0 +1,21 @@
+<em style="color: green; font-size: 2em;">
+    AP Scripting: <br><br>
+</em>
+
+<form action="/fetch" method="post">
+  IPv6 addresses:
+  <textarea
+    name="ips"
+    onblur="setDefault(this)"
+    onfocus="clearContents(this)"
+    cols="40"
+    rows="5">IPv6 separated by new line
+  </textarea>
+  <input type="submit" value="fetch">
+</form>
+
+<% if defined?(aps) %>
+  <% aps.each do |ip, info| %>
+    <%= "#{ip}<br>model: #{info[:model]}<br>Name: #{info[:name]}<br><br>" %>
+  <% end %>
+<%end %>
