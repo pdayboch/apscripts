@@ -16,6 +16,9 @@
 
 <% if defined?(aps) %>
   <% aps.each do |ip, info| %>
-    <%= "#{ip}<br>model: #{info[:model]}<br>Name: #{info[:name]}<br><br>" %>
+    <%= "#{ip}<br>
+    Name: #{info[:name]}<br>
+    Model: #{info[:model]}<br>
+    Build: #{info[:build]}<br><br>" %>
   <% end %>
 <%end %>

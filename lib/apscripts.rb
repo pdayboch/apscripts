@@ -32,12 +32,16 @@ class Setup
   def getData()
     threads = []
     @aps.each do |ip, info|
+      sleep(0.1)
       threads.push(Thread.new{
         getConfig(ip)
+        getBuild(ip)
         parseConfig(ip, "product_model", :model)
         parseConfig(ip, "node_name", :name)
       })
-      threads.each {|t| t.join}
+    end
+    threads.each do |t|
+      t.join
     end
   end
 
@@ -46,6 +50,12 @@ class Setup
     cmd = "cat /storage/config"
     config = Ssh.do_ssh(ip, cmd)
     @aps[ip][:config] = config
+  end
+
+  def getBuild(ip)
+    cmd = "cat /MERAKI_BUILD"
+    config = Ssh.do_ssh(ip, cmd)
+    @aps[ip][:build] = config
   end
 
   private
